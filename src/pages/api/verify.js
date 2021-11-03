@@ -11,7 +11,8 @@ const verifySignature = async ({
   try {
     const verify = sodium.crypto_sign_verify_detached(
       b58cdecode(signature, prefix.edsig),
-      blake2b(32, bytes),
+      // blake2b(32, bytes),
+      bytes,
       b58cdecode(publicKey, prefix.edpk),
     );
     return verify;
