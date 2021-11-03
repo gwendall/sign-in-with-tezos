@@ -31,7 +31,6 @@ const Page = () => {
       console.log('Got payload...', payload);
       const { signature } = await walletRef.current.client.requestSignPayload(payload);
       console.log('Got signature...', signature);
-      // 3. verify server-side & generate auth token
       const body = {
         signature,
         publicKey,

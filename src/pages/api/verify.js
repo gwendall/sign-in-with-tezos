@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       publicKey,
     } = req.body;
     const bytes = getSignatureBytes('hello world');
-    console.log('Got bytes from nonce.', bytes);
+    console.log('Got bytes.', bytes);
     const isVerified = await verifySignature({ bytes, signature, publicKey });
     console.log('Verified signature?', isVerified);
     // TODO: We should be able to get a boolean to know whether we could validate the signature server-side
