@@ -5,7 +5,9 @@ const stringEncoder = (s) => {
   return `0501${toPaddedHex(bytes.length)}${bytes.toString('hex')}`;
 };
 
-export const getSignatureBytes = (message) => {
+export const getSignatureMessage = (nonce = 123) => `Hi from Tezos! Sign this message to prove you have access to this wallet and we'll log you in. This won't cost you any XTZ. For enhanced security, here's a one-time code (no need to remember it): ${nonce}.`;
+
+export const getSignatureBytes = (message = getSignatureMessage()) => {
   const formattedInput = [
     'Tezos Signed Message:',
     message,
