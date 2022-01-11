@@ -14,10 +14,12 @@ const wallet = new BeaconWallet({
 Tezos.setWalletProvider(wallet);
 
 const Page = () => {
+  const [isSigningIn, setIsSigningIn] = React.useState(false);
   const [status, setStatus] = React.useState();
   const signIn = async () => {
+    setIsSigningIn(true);
+    setStatus(null);
     try {
-      setStatus(null);
       await wallet.requestPermissions({
         network: {
           type: 'mainnet',
@@ -51,11 +53,13 @@ const Page = () => {
         type: 'error',
         data: err.message,
       });
-    } 
+    } finally {
+      setIsSigningIn(false);
+    }
   };
   return (
     <>
-      <button onClick={ signIn }>sign message</button>
+      <button onClick={ signIn } disabled={ isSigningIn }>sign in</button>
       {status ? (
         <pre>{ JSON.stringify(status, null, 2) }</pre>
       ) : null}
